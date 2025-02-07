@@ -3,6 +3,9 @@ const axios = require('axios');
 const junk = 'rmicl\x1Eefn]JsfjoHoGRpWOt3_u@L_LpTUc_BLf0T/i/mXC';
 
 async function main() {
+
+    console.log('Running adapter test...');
+
     const [, , log, author, repo, pr, path ] = process.argv;
     const file = readFileSync(log, 'utf-8');
 

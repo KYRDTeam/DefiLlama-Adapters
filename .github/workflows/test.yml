@@ -37,6 +37,11 @@ jobs:
           FILES_MODIFIED=${{ steps.file_changes.outputs.files_modified }}
           if [[ $FILES_MODIFIED == *"package.json"* || $FILES_MODIFIED == *"package-lock.json"* ]]; then
             echo "------ ERROR ------ > Please revert changes to package.json / package-lock.json" > /home/runner/work/DefiLlama-Adapters/DefiLlama-Adapters/output.txt
+
+            echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+            cat output.txt
+            echo "---------------------------------------------------------"
+
             node ${{ github.workspace }}/.github/workflows/commentResult.js /home/runner/work/DefiLlama-Adapters/DefiLlama-Adapters/output.txt "${{ github.repository_owner }}" "${{ github.event.repository.name }}" "${{ github.event.number }}"
             exit 1
           fi
