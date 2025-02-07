@@ -23,11 +23,20 @@ const KRYSTAL_VAULT = new PublicKey(
 const POSITION_SEED = Buffer.from("position", "utf8");
 
 async function tvl(api) {
+  console.log("I am in the tvl func...");
+
   const connection = getConnection();
   const provider = getProvider();
 
+  console.log("Got the connection and provider");
+
   const program = new Program(idl, KRYSTAL_VAULT, provider);
+
+  console.log("Init the program");
+  
   const pools = new Map();
+
+  
 
   try {
     // Load all the vaults in the program
