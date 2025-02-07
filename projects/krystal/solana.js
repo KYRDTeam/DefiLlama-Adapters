@@ -1,4 +1,5 @@
-const { Program } = require("@coral-xyz/anchor");
+const { Program } = require("@project-serum/anchor");
+
 const { PublicKey } = require("@solana/web3.js");
 const {
   TOKEN_PROGRAM_ID,
@@ -33,7 +34,7 @@ async function tvl(api) {
   const program = new Program(idl, KRYSTAL_VAULT, provider);
 
   console.log("Init the program");
-  
+
   const pools = new Map();
 
   
