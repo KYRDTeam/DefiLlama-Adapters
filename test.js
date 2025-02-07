@@ -139,6 +139,8 @@ function validateHallmarks(hallmark) {
   const chains = Object.keys(module).filter(item => typeof module[item] === 'object' && !Array.isArray(module[item]));
   checkExportKeys(module, passedFile, chains)
 
+  console.log("Im hereeeeeeeeeee");
+
   let unixTimestamp = Math.round(Date.now() / 1000) - 60;
   let chainBlocks = {}
   const passedTimestamp = process.argv[3]
@@ -171,7 +173,9 @@ function validateHallmarks(hallmark) {
           tvlFunctionIsFetch = true;
         }
         try {
-
+        
+        console.log("Prepare to getTvl");
+        console.log("tvlFunction: ", tvlFunction);
         await getTvl(
           unixTimestamp,
           ethBlock,
@@ -187,6 +191,9 @@ function validateHallmarks(hallmark) {
           console.error(`Error in ${storedKey}:`, e)
           process.exit(1)
         }
+
+        console.log("get tvl already");
+
         let keyToAddChainBalances = tvlType;
         if (tvlType === "tvl" || tvlType === "fetch") {
           keyToAddChainBalances = "tvl";
@@ -196,7 +203,12 @@ function validateHallmarks(hallmark) {
         } else {
           chainTvlsToAdd[keyToAddChainBalances].push(storedKey);
         }
+
+        
+
       })
+
+      
     );
   });
   if (module.tvl || module.fetch) {
