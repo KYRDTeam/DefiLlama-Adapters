@@ -33,11 +33,6 @@ jobs:
           npm ci
           # npm update @defillama/sdk
 
-          echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-          cat output.txt
-          echo "---------------------------------------------------------"
-
-
           # fail if package.json or package-lock.json is changed
           FILES_MODIFIED=${{ steps.file_changes.outputs.files_modified }}
           if [[ $FILES_MODIFIED == *"package.json"* || $FILES_MODIFIED == *"package-lock.json"* ]]; then
@@ -50,6 +45,7 @@ jobs:
           for i in $(echo $RUN_FILES | tr  -d '"[]' | tr "," "\n")
           do 
             { 
+              echo ">>> Testing $i"
               node ${{ github.workspace }}/test.js ${{ github.workspace }}/${i} 2>&1 | tee output.txt
               node ${{ github.workspace }}/.github/workflows/commentResult.js /home/runner/work/DefiLlama-Adapters/DefiLlama-Adapters/output.txt "${{ github.repository_owner }}" "${{ github.event.repository.name }}" "${{ github.event.number }}" ${i}
               if grep -q "\-\-\-\- ERROR \-\-\-\-" output.txt; then
